@@ -11,43 +11,29 @@ import java.util.Map;
 @Service
 public class HouseListService {
 
-    private List<Map<String, Object>> houses = new ArrayList<>();
+    private Map<String, House> houses = new HashMap<>();
     public void addHouse(House house) {
-        Map<String, Object> temp = new HashMap<>();
-        temp.put("code", house.getCode());
-        temp.put("name", house.getName());
-        temp.put("city", house.getCity());
-        temp.put("price", house.getPrice());
-        houses.add(temp);
+        houses.put(house.getCode(), new House(house.getName(), house.getStatus(), house.getCity(), house.getPrice()));
     }
 
     public void updateHouse(String code, House house) {
-        for (Map<String, Object> temp: houses) {
-            if (temp.get("code").equals(code)){
-                temp.replace("status", house.getStatus());
-                temp.replace("name", house.getName());
-                temp.replace("price", house.getPrice());
-                break;
-            }
+        House flag = houses.get(code);
+        if (flag != null){
+            flag.setCity(house.getCity());
+            flag.setName(house.getName());
+            flag.setPrice(house.getPrice());
+            flag.setStatus(house.getStatus());
         }
     }
 
-    public List<Map<String, Object>> getHouses() {
+    public Map<String, House> getHouses() {
         return houses;
     }
 
     public void deleteHouse(String code) {
-        int counter = 0;
-        boolean found = false;
-        for (Map<String, Object> temp: houses) {
-            if (code.equals(temp.get("code"))){
-                found = true;
-                break;
+        House flag = houses.get(code);
+            if (flag != null){
+                houses.remove(code);
             }
-            counter++;
-        }
-        if (found){
-            houses.remove(counter);
-        }
     }
 }

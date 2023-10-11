@@ -32,7 +32,7 @@ public class HouseListServiceController {
     }
 
     @GetMapping
-    public List<Map<String, Object>> getHouses(){
+    public Map<String, House> getHouses(){
         return houseListService.getHouses();
     }
 

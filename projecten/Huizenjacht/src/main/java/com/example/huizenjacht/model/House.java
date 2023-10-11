@@ -11,8 +11,7 @@ public class House {
         status = Status.FOR_SALE;
     }
 
-    public House(String code, String name, Status status, String city, double price) {
-        this.code = code;
+    public House(String name, Status status, String city, double price) {
         this.name = name;
         this.status = status;
         this.city = city;
